@@ -117,7 +117,8 @@ $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                                                 <?php echo $row_chamado['status_chamado']; ?><br><br>
 
                                                 <strong>Relato Abertura:</strong><br>
-                                                <?php echo $row_chamado['relato_inicial']; ?><br>
+                                                <?php echo nl2br($row_chamado['relato_inicial']); ?><br>
+
                                                 <br>
                                                 <div class="text-center">
 

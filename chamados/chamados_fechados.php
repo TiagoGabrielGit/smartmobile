@@ -58,22 +58,15 @@ $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                                 // Itera sobre os resultados para exibir cada chamado em um acordeão
                                 while ($row_chamado = $stmt_chamados->fetch(PDO::FETCH_ASSOC)) {
 
-                                    ?>
+                            ?>
                                     <div class="accordion-item">
                                         <h2 class="accordion-header" id="flush-heading<?= $row_chamado['id']; ?>">
-                                            <button class="accordion-button collapsed closed" id="closed" type="button"
-                                                data-bs-toggle="collapse"
-                                                data-bs-target="#flush-collapse<?php echo $row_chamado['id']; ?>"
-                                                aria-expanded="false"
-                                                aria-controls="flush-collapse<?php echo $row_chamado['id']; ?>">
+                                            <button class="accordion-button collapsed closed" id="closed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse<?php echo $row_chamado['id']; ?>" aria-expanded="false" aria-controls="flush-collapse<?php echo $row_chamado['id']; ?>">
                                                 <?php echo '#' . $row_chamado['id'] . ' ' . $row_chamado['assunto']; ?>
                                             </button>
 
                                         </h2>
-                                        <div id="flush-collapse<?php echo $row_chamado['id']; ?>"
-                                            class="accordion-collapse collapse"
-                                            aria-labelledby="flush-heading<?php echo $row_chamado['id']; ?>"
-                                            data-bs-parent="#accordionFlushExample">
+                                        <div id="flush-collapse<?php echo $row_chamado['id']; ?>" class="accordion-collapse collapse" aria-labelledby="flush-heading<?php echo $row_chamado['id']; ?>" data-bs-parent="#accordionFlushExample">
                                             <div class="accordion-body">
                                                 <strong>Data Abertura:</strong>
                                                 <?php echo $row_chamado['data_abertura']; ?><br>
@@ -89,17 +82,17 @@ $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 
                                                 <strong>Relato Abertura:</strong><br>
-                                                <?php echo $row_chamado['relato_inicial']; ?><br>
+                                                <?php echo nl2br($row_chamado['relato_inicial']); ?><br>
+
                                                 <br>
                                                 <div class="text-center">
 
-                                                    <a href="/chamados/visualizar_chamado.php?id=<?= $row_chamado['id']; ?>"
-                                                        class="btn btn-sm btn-danger">Ver Chamado</a>
+                                                    <a href="/chamados/visualizar_chamado.php?id=<?= $row_chamado['id']; ?>" class="btn btn-sm btn-danger">Ver Chamado</a>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <?php
+                                <?php
                                 }
                             } else {
                                 // Se não houver chamados, exibe uma mensagem indicando isso
@@ -107,7 +100,7 @@ $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                                 <div class="alert alert-info" role="alert">
                                     Nenhum chamado encontrado.
                                 </div>
-                                <?php
+                            <?php
                             }
                             ?>
                         </div><!-- End Accordion without outline borders -->

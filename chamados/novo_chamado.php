@@ -29,9 +29,9 @@ try {
                                     <option disabled selected value="">Selecione uma opção</option>
                                     <?php
                                     $stmt_tipos_chamados = $pdo->prepare("SELECT tc.id, tc.tipo, tc.mascara
-                                    FROM chamados_autorizados_mobile_by_equipe AS came
-                                    LEFT JOIN tipos_chamados as tc ON came.tipo_id = tc.id
-                                    WHERE came.equipe_id = :equipe_id AND tc.mobile = 1 AND tc.active = 1");
+    FROM chamados_autorizados_mobile_by_equipe AS came
+    LEFT JOIN tipos_chamados as tc ON came.tipo_id = tc.id
+    WHERE came.equipe_id = :equipe_id AND tc.mobile = 1 AND tc.active = 1");
 
                                     $stmt_tipos_chamados->bindParam(':equipe_id', $equipe_id);
 
@@ -39,7 +39,11 @@ try {
                                     if ($stmt_tipos_chamados->rowCount() > 0) {
                                         // Iterar sobre os resultados da consulta e criar as opções do select
                                         while ($row_tipos_chamados = $stmt_tipos_chamados->fetch(PDO::FETCH_ASSOC)) {
-                                            echo "<option value='" . $row_tipos_chamados['id'] . "' data-mascara='" . $row_tipos_chamados['mascara'] . "'>" . $row_tipos_chamados['tipo'] . "</option>";
+                                            $optionValue = $row_tipos_chamados['id'];
+                                            $optionText = $row_tipos_chamados['tipo'];
+                                            $optionDataMask = isset($row_tipos_chamados['mascara']) ? $row_tipos_chamados['mascara'] : ''; // Verifica se a chave 'mascara' está definida
+
+                                            echo "<option value='$optionValue' data-mascara='$optionDataMask'>$optionText</option>";
                                         }
                                     } else {
                                         echo "Nenhum tipo de chamado encontrado.";
@@ -69,9 +73,10 @@ try {
                                             $stmt_servicos->execute();
 
                                             if ($stmt_servicos->rowCount() > 0) {
-                                                while ($row_servicos = $stmt_servicos->fetch(PDO::FETCH_ASSOC)) {
-                                                    echo "<option value='" . $row_servicos['contractServiceID'] . "' data-mascara='" . $row_servicos['mascara'] . "'>" . $row_servicos['service'] . "</option>";
-                                                }
+                                                while ($row_servicos = $stmt_servicos->fetch(PDO::FETCH_ASSOC)) { ?>
+
+                                                    <option value="<?= $row_servicos['contractServiceID'] ?>"><?= $row_servicos['service'] ?></option>
+                                        <?php }
                                             } else {
                                                 echo "<option value=''>Nenhum serviço encontrado.</option>";
                                             }

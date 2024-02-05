@@ -37,7 +37,8 @@ try {
                             </div>
                             <br>
                             <strong>Relato Abertura:</strong><br>
-                            <?php echo $chamado['relato_inicial']; ?><br>
+                            <?php echo nl2br($chamado['relato_inicial']);?><br>
+
                         </div>
                     </div>
                 </div>

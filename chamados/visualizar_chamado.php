@@ -171,7 +171,7 @@ try {
 
 
                     <form action="processa/upload.php" method="POST" id="uploadForm" enctype="multipart/form-data">
-                        <input id="uploadChamadoID" name="uploadChamadoID" value="<?= $chamado['id'] ?> " hidden="" readonly="">
+                        <input id="uploadChamadoID" name="uploadChamadoID" value="<?= $chamado['id'] ?>" hidden="" readonly="">
                         <div class="col-lg-12 row">
                             <div class="col-8">
                                 <input title="Permitido: jpg, jpeg, png, txt, pdf" required="" class="form-control" type="file" name="fileInput" id="fileInput" multiple="">
